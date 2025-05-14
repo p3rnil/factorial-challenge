@@ -10,6 +10,27 @@ import {
 } from '@/components/bike-configurator/data'
 import type { ConfigSelection, PartOption } from '@/components/bike-configurator/types'
 
+function getSelectionDetails(
+  selection: ConfigSelection,
+  options: Record<string, PartOption<unknown>[]>
+): { label: string; price: number }[] {
+  const details: { label: string; price: number }[] = [];
+
+  for (const [key, opts] of Object.entries(options)) {
+    const selectedId = selection[key as keyof ConfigSelection];
+    const found = opts.find((opt) => opt.id === selectedId);
+
+    if (found) {
+      details.push({
+        label: found.label,
+        price: found.getPrice(selection),
+      });
+    }
+  }
+
+  return details;
+}
+
 function calculateTotalPrice(
   selection: ConfigSelection,
   options: Record<string, PartOption<unknown>[]>
@@ -41,6 +62,16 @@ export default function Ticket({ selection }: Props) {
       chain: chainOptions,
     }), [selection])
 
+
+  const details = useMemo(() =>
+    getSelectionDetails(selection, {
+      frame: frameOptions,
+      finish: finishOptions,
+      wheels: wheelOptions,
+      rimColor: rimColorOptions,
+      chain: chainOptions,
+    }), [selection])
+
   return (
     <Card className="w-[300px] font-mono p-4">
       <div className="text-center">
@@ -53,6 +84,15 @@ export default function Ticket({ selection }: Props) {
         <p><span className="font-semibold">Date:</span>{new Date().toLocaleDateString()}</p>
         <p><span className="font-semibold">Ticket #:</span> 001234</p>
         <p><span className="font-semibold">Client:</span> Nicolás</p>
+      </div>
+      <Separator />
+      <div className="text-sm min-h-32">
+        <h2 className="font-bold mb-2">Items</h2>
+        {details.map((item, index) =>
+          <div key={index} className="flex justify-between items-start">
+            <span className="align-top">{item.label}</span>
+            <span className="align-top text-right">${item.price}</span>
+          </div>)}
       </div>
       <Separator />
       <div className="pt-2 text-sm">
