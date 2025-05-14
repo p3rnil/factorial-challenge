@@ -8,7 +8,7 @@ This project is a bike configurator application built with **React**, **TypeScri
 - Dynamic pricing based on selected parts
 - Compatibility rules between components
 
-## Solucion propuesta 
+## Proposed Solution
 
 The proposed solution is a simulation of polymorphism in an object-oriented programming style. In this case, I chose a more functional approach, since React is functional by nature, as you can see in the types.ts file.
 What enables this flexibility is the PartOption type, where we have two functions that let us dynamically define the price based on other selected parts and handle compatibility between them.
