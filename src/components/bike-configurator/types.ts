@@ -1,8 +1,8 @@
-type FrameType = 'full-suspension' | 'diamond' | 'step-through';
-type FrameFinishType = 'matte' | 'shiny';
-type WheelType = 'road' | 'mountain' | 'fat';
-type RimColorType = 'red' | 'black' | 'blue';
-type ChainType = 'single-speed' | '8-speed';
+export type FrameType = 'full-suspension' | 'diamond' | 'step-through';
+export type FrameFinishType = 'matte' | 'shiny';
+export type WheelType = 'road' | 'mountain' | 'fat';
+export type RimColorType = 'red' | 'black' | 'blue';
+export type ChainType = 'single-speed' | '8-speed';
 
 export type ConfigSelection = {
   frame?: FrameType;

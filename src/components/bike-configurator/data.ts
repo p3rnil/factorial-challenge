@@ -1,12 +1,12 @@
-import type { PartOption } from './types';
+import type { PartOption, FrameType, FrameFinishType, WheelType, RimColorType, ChainType } from './types';
 
-export const frameOptions: PartOption<'full-suspension' | 'diamond' | 'step-through'>[] = [
+export const frameOptions: PartOption<FrameType>[] = [
   { id: 'full-suspension', label: 'Full-suspension', getPrice: () => 1300 },
   { id: 'diamond', label: 'Diamond', getPrice: () => 1000 },
   { id: 'step-through', label: 'Step-through', getPrice: () => 900 },
 ];
 
-export const finishOptions: PartOption<'matte' | 'shiny'>[] = [
+export const finishOptions: PartOption<FrameFinishType>[] = [
   {
     id: 'matte',
     label: 'Matte',
@@ -19,7 +19,7 @@ export const finishOptions: PartOption<'matte' | 'shiny'>[] = [
   },
 ];
 
-export const wheelOptions: PartOption<'road' | 'mountain' | 'fat'>[] = [
+export const wheelOptions: PartOption<WheelType>[] = [
   {
     id: 'road',
     label: 'Road wheels',
@@ -38,7 +38,7 @@ export const wheelOptions: PartOption<'road' | 'mountain' | 'fat'>[] = [
   },
 ];
 
-export const rimColorOptions: PartOption<'red' | 'black' | 'blue'>[] = [
+export const rimColorOptions: PartOption<RimColorType>[] = [
   {
     id: 'red',
     label: 'Red',
@@ -49,7 +49,7 @@ export const rimColorOptions: PartOption<'red' | 'black' | 'blue'>[] = [
   { id: 'blue', label: 'Blue', getPrice: () => 650 },
 ];
 
-export const chainOptions: PartOption<'single-speed' | '8-speed'>[] = [
+export const chainOptions: PartOption<ChainType>[] = [
   { id: 'single-speed', label: 'Single-speed', getPrice: () => 430 },
   { id: '8-speed', label: '8-speed', getPrice: () => 600 },
 ];
