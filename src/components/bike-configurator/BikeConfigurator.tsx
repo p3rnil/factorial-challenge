@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import type { ConfigSelection, PartOption } from '@/components/bike-configurator/types'
+import type { ConfigSelection } from '@/components/bike-configurator/types'
 import {
   frameOptions,
   finishOptions,
@@ -23,6 +23,7 @@ import {
   rimColorOptions,
   chainOptions,
 } from '@/components/bike-configurator/data'
+import { isOptionAllowed } from '@/components/bike-configurator/utils'
 
 const categories = [
   { key: 'frame', label: 'Frame', options: frameOptions },
@@ -31,10 +32,6 @@ const categories = [
   { key: 'rimColor', label: 'Rim Color', options: rimColorOptions },
   { key: 'chain', label: 'Chain', options: chainOptions },
 ]
-
-function isOptionAllowed<T>(option: PartOption<T>, selection: ConfigSelection): boolean {
-  return option.isAllowed ? option.isAllowed(selection) : true
-}
 
 type Props = {
   selection: ConfigSelection

@@ -8,46 +8,9 @@ import {
   rimColorOptions,
   chainOptions,
 } from '@/components/bike-configurator/data'
-import type { ConfigSelection, PartOption } from '@/components/bike-configurator/types'
+import type { ConfigSelection } from '@/components/bike-configurator/types'
+import { calculateTotalPrice, getSelectionDetails } from '@/components/bike-configurator/utils'
 import AnimatedNumber from '@/components/AnimatedNumber'
-
-function getSelectionDetails(
-  selection: ConfigSelection,
-  options: Record<string, PartOption<unknown>[]>
-): { label: string; price: number }[] {
-  const details: { label: string; price: number }[] = [];
-
-  for (const [key, opts] of Object.entries(options)) {
-    const selectedId = selection[key as keyof ConfigSelection];
-    const found = opts.find((opt) => opt.id === selectedId);
-
-    if (found) {
-      details.push({
-        label: found.label,
-        price: found.getPrice(selection),
-      });
-    }
-  }
-
-  return details;
-}
-
-function calculateTotalPrice(
-  selection: ConfigSelection,
-  options: Record<string, PartOption<unknown>[]>
-): number {
-  let total = 0
-
-  for (const [key, opts] of Object.entries(options)) {
-    const selectedId = selection[key as keyof ConfigSelection]
-    const found = opts.find((opt) => opt.id === selectedId)
-    if (found) {
-      total += found.getPrice(selection)
-    }
-  }
-
-  return total
-}
 
 type Props = {
   selection: ConfigSelection
