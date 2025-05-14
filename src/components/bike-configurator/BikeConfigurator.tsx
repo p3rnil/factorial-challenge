@@ -54,21 +54,23 @@ export default function BikeConfigurator({ selection, setSelection }: Props) {
         <CardDescription>Select each part of your dream bike! Don't worry, all the prices will be calculated on the fly.</CardDescription>
       </CardHeader>
       <CardContent>
-        {categories.map(({ key, label, options }) => (
-          <div key={key} className="flex flex-col space-y-1.5">
-            <Label htmlFor="framework">{label}</Label>
-            <Select onValueChange={(e) => handleChange(key as keyof ConfigSelection, e)}>
-              <SelectTrigger id="framework" className="w-full cursor-pointer">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent position="popper">
-                {options.filter(opt => isOptionAllowed(opt, selection)).map((opt) => (
-                  <SelectItem className="cursor-pointer" key={opt.id} value={opt.id}>{opt.label}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        ))}
+        <div className="grid w-full items-center gap-4">
+          {categories.map(({ key, label, options }) => (
+            <div key={key} className="flex flex-col space-y-1.5">
+              <Label htmlFor="framework">{label}</Label>
+              <Select onValueChange={(e) => handleChange(key as keyof ConfigSelection, e)}>
+                <SelectTrigger id="framework" className="w-full cursor-pointer">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  {options.filter(opt => isOptionAllowed(opt, selection)).map((opt) => (
+                    <SelectItem className="cursor-pointer" key={opt.id} value={opt.id}>{opt.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ))}
+        </div>
       </CardContent>
       <CardFooter className="flex justify-end">
         <Button className="cursor-pointer">Order my bike 🚀</Button>
