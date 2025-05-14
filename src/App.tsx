@@ -8,7 +8,6 @@ function App() {
 
   return (
     <div className="flex justify-center gap-4">
-      <h1>Marku's bike shop</h1>
       <BikeConfigurator selection={selection} setSelection={setSelection} />
       <Ticket selection={selection} />
     </div>
