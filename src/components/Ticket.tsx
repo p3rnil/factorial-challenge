@@ -9,6 +9,7 @@ import {
   chainOptions,
 } from '@/components/bike-configurator/data'
 import type { ConfigSelection, PartOption } from '@/components/bike-configurator/types'
+import AnimatedNumber from '@/components/AnimatedNumber'
 
 function getSelectionDetails(
   selection: ConfigSelection,
@@ -96,9 +97,9 @@ export default function Ticket({ selection }: Props) {
       </div>
       <Separator />
       <div className="pt-2 text-sm">
-        <p className="flex justify-between"><span>Subtotal:</span><span>${total}</span></p>
-        <p className="flex justify-between"><span>TAX (10%):</span><span>${total * 0.1}</span></p>
-        <p className="flex justify-between font-bold text-lg"><span>Total:</span><span>${total + (total * 0.1)}</span></p>
+        <p className="flex justify-between"><span>Subtotal:</span><span>$<AnimatedNumber value={total} /></span></p>
+        <p className="flex justify-between"><span>TAX (10%):</span><span>$<AnimatedNumber value={total * 0.1} /></span></p>
+        <p className="flex justify-between font-bold text-lg"><span>Total:</span><span>$<AnimatedNumber value={total + (total * 0.1)} /></span></p>
       </div>
       <div className="text-center mt-6 text-xs text-gray-500">
         <p>Thank you for your purchase 🙌</p>
