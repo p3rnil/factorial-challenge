@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -16,16 +15,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
 import type { ConfigSelection, PartOption } from '@/components/bike-configurator/types'
-
 import {
   frameOptions,
   finishOptions,
   wheelOptions,
   rimColorOptions,
   chainOptions,
-} from '@/components/bike-configurator/data';
+} from '@/components/bike-configurator/data'
 
 const categories = [
   { key: 'frame', label: 'Frame', options: frameOptions },
@@ -33,49 +30,22 @@ const categories = [
   { key: 'wheels', label: 'Wheels', options: wheelOptions },
   { key: 'rimColor', label: 'Rim Color', options: rimColorOptions },
   { key: 'chain', label: 'Chain', options: chainOptions },
-];
+]
 
 function isOptionAllowed<T>(option: PartOption<T>, selection: ConfigSelection): boolean {
-  return option.isAllowed ? option.isAllowed(selection) : true;
-}
-
-function calculateTotalPrice(
-  selection: ConfigSelection,
-  options: Record<string, PartOption<unknown>[]>
-): number {
-  let total = 0;
-
-  for (const [key, opts] of Object.entries(options)) {
-    const selectedId = selection[key as keyof ConfigSelection];
-    const found = opts.find((opt) => opt.id === selectedId);
-    if (found) {
-      total += found.getPrice(selection);
-    }
-  }
-
-  return total;
+  return option.isAllowed ? option.isAllowed(selection) : true
 }
 
 type Props = {
-  selection: ConfigSelection;
-  setSelection: React.Dispatch<React.SetStateAction<ConfigSelection>>;
-};
+  selection: ConfigSelection
+  setSelection: React.Dispatch<React.SetStateAction<ConfigSelection>>
+}
 
 export default function BikeConfigurator({ selection, setSelection }: Props) {
 
   const handleChange = (key: keyof ConfigSelection, value: string) => {
-    setSelection((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const total = useMemo(() =>
-    calculateTotalPrice(selection, {
-      frame: frameOptions,
-      finish: finishOptions,
-      wheels: wheelOptions,
-      rimColor: rimColorOptions,
-      chain: chainOptions,
-    }), [selection]);
-
+    setSelection((prev) => ({ ...prev, [key]: value }))
+  }
 
   return (
     <Card className="w-[350px]">
@@ -101,9 +71,8 @@ export default function BikeConfigurator({ selection, setSelection }: Props) {
         ))}
       </CardContent>
       <CardFooter className="flex justify-end">
-        ${total}
         <Button className="cursor-pointer">Order my bike 🚀</Button>
       </CardFooter>
     </Card>
-  );
+  )
 }
